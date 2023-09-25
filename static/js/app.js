@@ -21,24 +21,62 @@ function loadIds() {
 
 function loadData(selectedId) {
     d3.json(url).then(function(data) {
-        // console.log(data)
-
         var selectedSample = data.samples.find(sample => sample.id === selectedId)
-        
-        var sampleValues = selectedSample.sample_values.slice(0,10).reverse()
-        var otuIds = selectedSample.otu_ids.slice(0,10).map(id => `OTU ${id}`).reverse()
-        var otuLabels = selectedSample.otu_labels.slice(0,10).reverse()
+        var selectedSubject = data.metadata.find(subject => subject.id === parseInt(selectedId))
 
-        var data = [{
-            x: sampleValues,
-            y: otuIds,
-            text: otuLabels,
-            type: "bar",
-            orientation: "h"
-        }]
-    
-        Plotly.newPlot("bar", data)
+        var sampleValues = selectedSample.sample_values
+        var otuIds = selectedSample.otu_ids
+        var otuLabels = selectedSample.otu_labels
+
+        updateBarChart(sampleValues, otuIds, otuLabels)
+        updateBubbleChart(sampleValues, otuIds, otuLabels)
+        updateMetadata(selectedSubject)
     })
+
+}
+
+function updateBarChart(sampleValues, otuIds, otuLabels) {
+
+    var data = [{
+        x: sampleValues.slice(0,10).reverse(),
+        y: otuIds.slice(0,10).map(id => `OTU ${id}`).reverse(),
+        text: otuLabels.slice(0,10).reverse(),
+        type: "bar",
+        orientation: "h"
+    }]
+
+    Plotly.newPlot("bar", data)
+
+}
+
+function updateBubbleChart(sampleValues, otuIds, otuLabels) {
+
+    var data = [{
+        x: otuIds,
+        y: sampleValues,
+        text: otuLabels,
+        mode: "markers",
+        marker: {
+            size: sampleValues,
+            color: otuIds
+        }
+    }]
+
+    Plotly.newPlot("bubble", data)
+
+}
+
+function updateMetadata(selectedSubject) {
+    var subjectId = selectedSubject.id
+    var subjectEthnicity = selectedSubject.ethnicity
+    var subjectGender = selectedSubject.gender
+    var subjectAge = selectedSubject.age
+    var subjectLocation = selectedSubject.location
+    var subjectBbtype = selectedSubject.bbtype
+    var subjectWfreq = selectedSubject.wfreq
+    
+    // console.log(subjectAge)
+    // console.log(selectedSubject)
 }
 
 init()
