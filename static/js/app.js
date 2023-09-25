@@ -74,9 +74,22 @@ function updateMetadata(selectedSubject) {
     var subjectLocation = selectedSubject.location
     var subjectBbtype = selectedSubject.bbtype
     var subjectWfreq = selectedSubject.wfreq
-    
+
+    var metadataHtml = `
+        <p><strong>Subject ID:</strong> ${subjectId}</p>
+        <p><strong>Ethnicity:</strong> ${subjectEthnicity}</p>
+        <p><strong>Gender:</strong> ${subjectGender}</p>
+        <p><strong>Age:</strong> ${subjectAge}</p>
+        <p><strong>Location:</strong> ${subjectLocation}</p>
+        <p><strong>Belly Button Type:</strong> ${subjectBbtype}</p>
+        <p><strong>Wash Frequency:</strong> ${subjectWfreq}</p>
+    `
+
+    document.getElementById("sample-metadata").innerHTML = metadataHtml
+
     // console.log(subjectAge)
     // console.log(selectedSubject)
+
 }
 
 init()
