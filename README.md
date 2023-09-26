@@ -8,4 +8,4 @@ This project displays a dashboard containing data from a scientific study on bac
 - [Bootstrap](https://getbootstrap.com/)
 
 ## Resources
-Data for this project was imported from [this url](https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json), and the .json file is included for reference.
+Data for this project was imported from [this url](https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json), and the samples.json file is included for reference.
